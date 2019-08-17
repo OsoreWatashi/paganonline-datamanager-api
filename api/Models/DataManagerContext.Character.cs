@@ -17,7 +17,6 @@ namespace PaganOnline.DataManager.API.Models
         var command = connection.CreateCommand();
         command.CommandText = "SELECT TechnicalName, DisplayName FROM Characters";
 
-
         using (var reader = await command.ExecuteReaderAsync())
           while (await reader.ReadAsync())
             characters.Add(new Character((string) reader["TechnicalName"], (string) reader["DisplayName"]));
