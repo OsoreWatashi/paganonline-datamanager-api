@@ -20,7 +20,7 @@ namespace PaganOnline.DataManager.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-      services.Add(new ServiceDescriptor(typeof(DataManagerContext),  new DataManagerContext(Configuration.GetConnectionString("paganonline-datamanager"))));
+      services.AddSingleton(new DataManagerContext(Configuration.GetConnectionString("paganonline-datamanager")));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

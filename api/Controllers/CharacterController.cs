@@ -10,19 +10,23 @@ namespace PaganOnline.DataManager.API.Controllers
   [ApiController, Route("api/[controller]")]
   public class CharacterController : Controller
   {
+    private readonly DataManagerContext _context;
+    public CharacterController(DataManagerContext context)
+    {
+      _context = context;
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Character>>> Index()
     {
-      var context = (DataManagerContext) HttpContext.RequestServices.GetService(typeof(DataManagerContext));
-      var characters = await context.GetAllCharacters();
+      var characters = await _context.GetAllCharacters();
       return Ok(characters.ToArray());
     }
 
     [HttpGet, Route("{technicalName}")]
     public async Task<ActionResult<Character>> GetCharacter(string technicalName)
     {
-      var context = (DataManagerContext) HttpContext.RequestServices.GetService(typeof(DataManagerContext));
-      var character = await context.GetCharacterByTechnicalName(technicalName);
+      var character = await _context.GetCharacterByTechnicalName(technicalName);
 
       if (character == null)
         return NotFound(technicalName);
@@ -35,8 +39,7 @@ namespace PaganOnline.DataManager.API.Controllers
       if (!Character.Validate(character))
         return BadRequest(character);
 
-      var context = (DataManagerContext) HttpContext.RequestServices.GetService(typeof(DataManagerContext));
-      var technicalName = await context.CreateCharacter(character);
+      var technicalName = await _context.CreateCharacter(character);
 
       if (String.IsNullOrWhiteSpace(technicalName))
         return Conflict(character.TechnicalName);
@@ -49,8 +52,7 @@ namespace PaganOnline.DataManager.API.Controllers
       if (!Character.Validate(character))
         return BadRequest(character);
 
-      var context = (DataManagerContext) HttpContext.RequestServices.GetService(typeof(DataManagerContext));
-      var result = await context.UpdateCharacter(technicalName, character);
+      var result = await _context.UpdateCharacter(technicalName, character);
 
       if (result.Conflict)
         return Conflict(character.TechnicalName);
@@ -64,8 +66,7 @@ namespace PaganOnline.DataManager.API.Controllers
     [HttpDelete, Route("{technicalName}")]
     public async Task<ActionResult> DeleteCharacter(string technicalName)
     {
-      var context = (DataManagerContext) HttpContext.RequestServices.GetService(typeof(DataManagerContext));
-      var result = await context.DeleteCharacter(technicalName);
+      var result = await _context.DeleteCharacter(technicalName);
 
       if (result.Conflict)
         return Conflict(technicalName);
