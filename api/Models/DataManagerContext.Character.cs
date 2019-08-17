@@ -69,9 +69,10 @@ namespace PaganOnline.DataManager.API.Models
       return success ? character.TechnicalName : null;
     }
 
-    public async Task<string> UpdateCharacter(string technicalName, Character character)
+    public async Task<(bool Conflict, string TechnicalName)> UpdateCharacter(string technicalName, Character character)
     {
       var success = false;
+      var conflict = false;
       using (MySqlConnection connection = GetConnection())
       {
         await connection.OpenAsync();
@@ -88,28 +89,38 @@ namespace PaganOnline.DataManager.API.Models
         }
         catch (Exception exception)
         {
+          conflict = true;
           Debug.WriteLine(exception);
         }
       }
 
-      return success ? character.TechnicalName : null;
+      return (conflict, success ? character.TechnicalName : null);
     }
 
-    public async Task<bool> DeleteCharacter(string technicalName)
+    public async Task<(bool Conflict, bool Success)> DeleteCharacter(string technicalName)
     {
       var success = false;
+      var conflict = false;
       using (MySqlConnection connection = GetConnection())
       {
         await connection.OpenAsync();
         var command = connection.CreateCommand();
         command.CommandText = "DELETE FROM Characters  WHERE TechnicalName = @TechnicalName";
         command.Parameters.AddWithValue("@TechnicalName", technicalName);
-        
-        var result = await command.ExecuteNonQueryAsync();
-        success = result == 1;
+
+        try
+        {
+          var result = await command.ExecuteNonQueryAsync();
+          success = result == 1;
+        }
+        catch (Exception exception)
+        {
+          conflict = true;
+          Debug.WriteLine(exception);
+        }
       }
 
-      return success;
+      return (conflict, success);
     }
   }
 }

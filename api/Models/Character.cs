@@ -1,4 +1,6 @@
-﻿namespace PaganOnline.DataManager.API.Models
+﻿using System;
+
+namespace PaganOnline.DataManager.API.Models
 {
   public class Character
   {
@@ -9,6 +11,18 @@
     {
       TechnicalName = technicalName;
       DisplayName = displayName;
+    }
+
+    public static bool Validate(Character character)
+    {
+      if (character == null)
+        return false;
+
+      if (String.IsNullOrWhiteSpace(character.TechnicalName) ||
+          String.IsNullOrWhiteSpace(character.DisplayName))
+        return false;
+
+      return true;
     }
   }
 }
