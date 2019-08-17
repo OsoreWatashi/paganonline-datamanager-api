@@ -1,0 +1,9 @@
+﻿PUT https://localhost:44388/api/character/a
+Content-Type: application/json
+
+{
+  "TechnicalName": "b",
+  "DisplayName": "c"
+}
+
+###

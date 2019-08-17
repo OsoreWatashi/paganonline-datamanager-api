@@ -1,0 +1,9 @@
+﻿POST https://localhost:44388/api/character
+Content-Type: application/json
+
+{
+  "TechnicalName": "a",
+  "DisplayName": "b"
+}
+
+###
