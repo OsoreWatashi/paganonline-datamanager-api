@@ -1,0 +1,4 @@
+﻿GET https://localhost:44388/api/skill/anya
+Accept: application/json
+
+###

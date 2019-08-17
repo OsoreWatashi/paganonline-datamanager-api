@@ -1,0 +1,16 @@
+﻿PUT https://localhost:44388/api/skill/anya/b
+Content-Type: application/json
+
+{
+  "ID": 20,
+  "CharacterTechnicalName": "anya",
+  "TechnicalName": "c",
+  "DisplayName": "Big c",
+  "Type": "Major",
+  "Description": "...",
+  "LevelRequirement": 1,
+  "MinimumPoints": 1,
+  "MaximumPoints": 5
+}
+
+###

@@ -1,0 +1,14 @@
+﻿POST https://localhost:44388/api/skill/anya
+Content-Type: application/json
+
+{
+  "TechnicalName": "b",
+  "DisplayName": "Big b",
+  "Type": "Ability",
+  "Description": "...",
+  "LevelRequirement": 1,
+  "MinimumPoints": 1,
+  "MaximumPoints": 5
+}
+
+###

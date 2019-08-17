@@ -1,0 +1,4 @@
+﻿DELETE https://localhost:44388/api/skill/anya/c
+Accept: application/json
+
+###
