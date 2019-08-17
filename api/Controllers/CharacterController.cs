@@ -44,7 +44,7 @@ namespace PaganOnline.DataManager.API.Controllers
     }
 
     [HttpPut, Route("{technicalName}")]
-    public async Task<ActionResult<string>> UpdateCharacter(string technicalName, Character character)
+    public async Task<ActionResult> UpdateCharacter(string technicalName, Character character)
     {
       if (!Character.Validate(character))
         return BadRequest(character);
@@ -62,7 +62,7 @@ namespace PaganOnline.DataManager.API.Controllers
     }
 
     [HttpDelete, Route("{technicalName}")]
-    public async Task<ActionResult<bool>> DeleteChaarcter(string technicalName)
+    public async Task<ActionResult> DeleteCharacter(string technicalName)
     {
       var context = (DataManagerContext) HttpContext.RequestServices.GetService(typeof(DataManagerContext));
       var result = await context.DeleteCharacter(technicalName);
