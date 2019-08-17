@@ -1,0 +1,8 @@
+FROM mysql:latest
+
+COPY ./create-scripts/* /docker-entrypoint-initdb.d/
+
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=paganonline-datamanager
+ENV MYSQL_USER=web
+ENV MYSQL_PASSWORD=webpassword
