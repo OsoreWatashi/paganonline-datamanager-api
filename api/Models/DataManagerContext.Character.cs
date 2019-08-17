@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
@@ -52,9 +54,16 @@ namespace PaganOnline.DataManager.API.Models
         command.CommandText = "INSERT INTO Characters (TechnicalName, DisplayName) VALUES (@TechnicalName, @DisplayName)";
         command.Parameters.AddWithValue("@TechnicalName", character.TechnicalName);
         command.Parameters.AddWithValue("@DisplayName", character.DisplayName);
-        
-        var result = await command.ExecuteScalarAsync();
-        success = true; // TODO: Properly read result
+
+        try
+        {
+          var result = await command.ExecuteNonQueryAsync();
+          success = result == 1;
+        }
+        catch (Exception exception)
+        {
+          Debug.WriteLine(exception);
+        }
       }
 
       return success ? character.TechnicalName : null;
@@ -71,9 +80,16 @@ namespace PaganOnline.DataManager.API.Models
         command.Parameters.AddWithValue("@TechnicalName", character.TechnicalName);
         command.Parameters.AddWithValue("@DisplayName", character.DisplayName);
         command.Parameters.AddWithValue("@TechnicalNameFilter", technicalName);
-        
-        var result = await command.ExecuteScalarAsync();
-        success = true; // TODO: Properly read result
+
+        try
+        {
+          var result = await command.ExecuteNonQueryAsync();
+          success = result == 1;
+        }
+        catch (Exception exception)
+        {
+          Debug.WriteLine(exception);
+        }
       }
 
       return success ? character.TechnicalName : null;
@@ -89,8 +105,8 @@ namespace PaganOnline.DataManager.API.Models
         command.CommandText = "DELETE FROM Characters  WHERE TechnicalName = @TechnicalName";
         command.Parameters.AddWithValue("@TechnicalName", technicalName);
         
-        var result = await command.ExecuteScalarAsync();
-        success = true; // TODO: Properly read result
+        var result = await command.ExecuteNonQueryAsync();
+        success = result == 1;
       }
 
       return success;
