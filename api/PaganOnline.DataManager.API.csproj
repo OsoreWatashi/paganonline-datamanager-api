@@ -20,6 +20,9 @@
       <Compile Update="Models\DataManagerContext.Skill.cs">
         <DependentUpon>DataManagerContext.cs</DependentUpon>
       </Compile>
+      <Compile Update="Models\DataManagerContext.SkillEffect.cs">
+        <DependentUpon>DataManagerContext.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

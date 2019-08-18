@@ -1,0 +1,4 @@
+﻿GET https://localhost:44388/api/skilleffect/5
+Accept: application/json
+
+###

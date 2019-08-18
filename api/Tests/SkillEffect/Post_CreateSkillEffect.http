@@ -1,0 +1,10 @@
+﻿POST https://localhost:44388/api/skilleffect/5
+Content-Type: application/json
+
+{
+  "Level": 4,
+  "Sequence": 1,
+  "Description": "..."
+}
+
+###

@@ -1,0 +1,11 @@
+﻿PUT https://localhost:44388/api/skilleffect/5/4/1
+Content-Type: application/json
+
+{
+  "SkillId": 5,
+  "Level": 4,
+  "Sequence": 2,
+  "Description": "..."
+}
+
+###
