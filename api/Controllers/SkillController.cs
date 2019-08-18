@@ -48,7 +48,6 @@ namespace PaganOnline.DataManager.API.Controllers
           return BadRequest(skill);
       }
 
-      skill.CharacterTechnicalName = characterTechnicalName;
       var result = await _context.CreateSkill(skill);
 
       if (String.IsNullOrWhiteSpace(result.CharacterTechnicalName) ||
@@ -67,7 +66,8 @@ namespace PaganOnline.DataManager.API.Controllers
       
       if (result.Conflict)
         return Conflict($"{skill.CharacterTechnicalName}/{skill.TechnicalName}");
-      if (String.IsNullOrWhiteSpace(result.TechnicalName))
+      if (String.IsNullOrWhiteSpace(result.CharacterTechnicalName) ||
+          String.IsNullOrWhiteSpace(result.TechnicalName))
         return NotFound($"{skill.CharacterTechnicalName}/{skill.TechnicalName}");
       if (!String.Equals(characterTechnicalName, result.CharacterTechnicalName) ||
           !String.Equals(technicalName, result.TechnicalName))
