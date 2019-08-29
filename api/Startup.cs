@@ -9,8 +9,7 @@ namespace PaganOnline.DataManager.API
 {
   public class Startup
   {
-    private const string DevelopmentCORS_Development = nameof(DevelopmentCORS_Development);
-    private const string DevelopmentCORS_Production = nameof(DevelopmentCORS_Production);
+    private const string CORS = nameof(CORS);
     
     public Startup(IConfiguration configuration)
     {
@@ -23,10 +22,13 @@ namespace PaganOnline.DataManager.API
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddCors(options =>
-        {
-          options.AddPolicy(DevelopmentCORS_Development, builder => { builder.WithOrigins("http://localhost:8080"); });
-          options.AddPolicy(DevelopmentCORS_Production, builder => { builder.WithOrigins("https://paganonline.wiki"); });
-        });
+      {
+        options.AddPolicy(CORS, builder => builder.
+          WithOrigins("*").
+          AllowAnyMethod().
+          AllowAnyHeader().
+          WithExposedHeaders("*"));
+      });
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
       services.AddSingleton(new DataManagerContext(Configuration.GetConnectionString("paganonline-datamanager")));
     }
@@ -35,17 +37,9 @@ namespace PaganOnline.DataManager.API
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
       if (env.IsDevelopment())
-      {
         app.UseDeveloperExceptionPage();
-        app.UseCors(DevelopmentCORS_Development);
-      }
-      else
-      {
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
-        app.UseCors(DevelopmentCORS_Production);
-      }
 
+      app.UseCors(CORS);
       app.UseHttpsRedirection();
       app.UseMvc();
     }
