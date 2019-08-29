@@ -1,0 +1,1 @@
+﻿dotnet publish .\paganonline-datamanager-api.sln --configuration Release --framework netcoreapp2.2 --output .\bin\Publish\ --self-contained false --runtime linux-x64

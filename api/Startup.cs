@@ -40,7 +40,6 @@ namespace PaganOnline.DataManager.API
         app.UseDeveloperExceptionPage();
 
       app.UseCors(CORS);
-      app.UseHttpsRedirection();
       app.UseMvc();
     }
   }
