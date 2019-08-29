@@ -1,4 +1,4 @@
-CREATETABLE SkillEffects
+CREATE TABLE SkillEffects
 (
   SkillID INT NOT NULL,
   Level TINYINT NOT NULL,
@@ -8,7 +8,7 @@ CREATETABLE SkillEffects
   CONSTRAINT SkillEffects_pk PRIMARY KEY (SkillID, Level, Sequence)
 );
 
-INSERT INTO (SkillID, Level, Sequence, Description) VALUES
+INSERT INTO SkillEffects (SkillID, Level, Sequence, Description) VALUES
   (5, 1, 1, 'Physical Damage 200%'),
   (5, 1, 2, 'Range 8m'),
   (5, 1, 3, 'Life Leech 3%'),
