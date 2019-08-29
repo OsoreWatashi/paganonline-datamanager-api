@@ -48,7 +48,7 @@ namespace PaganOnline.DataManager.API.Models
         return false;
 
       if (skill.LevelRequirement < 1 ||
-          skill.MinimumPoints < 1 ||
+          skill.MinimumPoints < 0 ||
           skill.MaximumPoints < 1 ||
           skill.MinimumPoints > skill.MaximumPoints)
         return false;

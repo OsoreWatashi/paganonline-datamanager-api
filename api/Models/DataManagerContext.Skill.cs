@@ -70,7 +70,8 @@ namespace PaganOnline.DataManager.API.Models
       {
         await connection.OpenAsync();
         var command = connection.CreateCommand();
-        command.CommandText = "INSERT INTO Skills (CharacterTechnicalName, TechnicalName, DisplayName, Type, Description, LevelRequirement, MinimumPoints, MaximumPoints) VALUES (@CharacterTechnicalName, @TechnicalName, @DisplayName, @Type, @Description, @LevelRequirement, @MinimumPoints, @MaximumPoints)";
+        command.CommandText = "INSERT INTO Skills (ParentID, CharacterTechnicalName, TechnicalName, DisplayName, Type, Description, LevelRequirement, MinimumPoints, MaximumPoints) VALUES (@ParentID, @CharacterTechnicalName, @TechnicalName, @DisplayName, @Type, @Description, @LevelRequirement, @MinimumPoints, @MaximumPoints)";
+        command.Parameters.AddWithValue("@ParentID", skill.ParentID);
         command.Parameters.AddWithValue("@CharacterTechnicalName", skill.CharacterTechnicalName);
         command.Parameters.AddWithValue("@TechnicalName", skill.TechnicalName);
         command.Parameters.AddWithValue("@DisplayName", skill.DisplayName);
